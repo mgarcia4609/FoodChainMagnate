@@ -1,0 +1,74 @@
+objects:
+
+----game----
+	-players
+	-active_phase
+	-map_size
+	-map_tiles
+	-available_employees
+	-available_marketing_tiles
+
+----player----
+	-brand
+	-employees[]
+	-dollars
+	-milestones[]
+	-restaurants[]
+	-active_marketing[]
+	-turn_order_position
+	-is_turn
+
+----restaurants----
+	-entrances[]
+	-distances_from_houses[]
+	-location
+	
+----employee----
+	-effect
+	-status
+	-hiring_requirement
+	-salary
+	-marketing_campain
+		*marketers only
+	
+----milestone----
+	-effect
+	-requirement
+	-is_unique
+	-is_available
+
+----food_item----
+	-type
+	-base_cost
+	-modified_cost
+
+----city_tile----
+	-road_squares[]
+	-location
+	-overpass
+	-land_squares[]
+	-restaurants[]
+	-houses[]
+	-gardens[]
+	-marketing_tiles[]
+	-drink_squares[]
+
+----house----
+	-foods_demanded[]
+	-is_marketed_to[]
+	-marketed_by_tool[]
+	-is_at_food_capacity
+	-location
+
+----bank----
+	-is_empty
+	-dollars
+	-has_reserves
+	
+----marketing_tile
+	-number
+	-marketing_employee
+	-marketing_phases_remaining
+	-is_active
+	-is_available
+	-location
