@@ -22,6 +22,18 @@ namespace GameHelper.Models
                 Salary = StaticFiles.Constants.EmployeeSalary;
                 IsMarketer = false;
             }
+            if (employeeType == "Marketing Trainee")
+            {
+                Status = "Beach";
+                Salary = StaticFiles.Constants.EmployeeSalary;
+                IsMarketer = false;
+            }
+            if (employeeType == "Management Trainee")
+            {
+                Status = "Beach";
+                Salary = StaticFiles.Constants.EmployeeSalary;
+                IsMarketer = true;
+            }
         }
     }
 }

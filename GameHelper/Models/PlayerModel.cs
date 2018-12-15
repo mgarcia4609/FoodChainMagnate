@@ -14,19 +14,22 @@ namespace GameHelper.Models
 
         public PlayerModel()
         {
+
             // TODO: Create logic to assign player numbers
             Id = 1;
+            Console.WriteLine($"Creating Player {Id}...");
             TurnOrderPosition = 1;
             IsTurn = true;
             //TODO: Implement logic to choose restaurant name
             RestaurantName = "Fried Geese & Donkey";
             Employees = new List<EmployeeModel>();
             Dollars = 0;
-
+            Console.WriteLine("Player Created!");
         }
 
         public void HireEmployee(string employeeName)
         {
+            Console.WriteLine($"Hiring {employeeName}");
             EmployeeModel newEmployee = new EmployeeModel(employeeName);
             Employees.Add(newEmployee);
         }
@@ -56,11 +59,24 @@ namespace GameHelper.Models
             }
         }
 
-        private void FireEmployees(int num)
+        private void FireEmployees(int numToFire)
         {
+            int selection = 0;
+
             Console.WriteLine($"Player {Id}, choose employees to fire...");
             Console.WriteLine("-----------------");
             ListEmployees();
+
+            for (int employeesFired = 0; employeesFired < numToFire; employeesFired++)
+            {
+                while (selection <= 0)
+                {
+                    selection = StaticFiles.HelperFunctions.GetNumericInput(Employees.Count);
+                }
+
+                Console.WriteLine($"Employee {selection} fired.");
+            }
+
 
         }
 
@@ -78,11 +94,13 @@ namespace GameHelper.Models
             foreach (EmployeeModel employee in Employees)
             {
                 Console.WriteLine($"{count}. {employee.Name}");
+                count++;
             }
         }
 
         private int CalculateSalariesOwed()
         {
+            Console.WriteLine("Calculating Player {Id}'s salaries owed...");
             int total = 0;
 
             foreach (EmployeeModel employee in this.Employees)
