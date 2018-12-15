@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace GameHelper.Models
 {
@@ -21,7 +19,7 @@ namespace GameHelper.Models
             if (employeeType == "Kitchen Trainee")
             {
                 Status = "Beach";
-                Salary = 0;
+                Salary = StaticFiles.Constants.EmployeeSalary;
                 IsMarketer = false;
             }
         }

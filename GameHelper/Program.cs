@@ -11,10 +11,14 @@ namespace GameHelper
             Console.ReadLine();
 
             PlayerModel player = new PlayerModel();
+
             player.HireEmployee("Kitchen Trainee");
             player.HireEmployee("Marketing Trainee");
             player.HireEmployee("Management Trainee");
             player.PrintEmployeeList();
+
+            Console.ReadLine();
+            player.PaySalaries();
 
             Console.ReadLine();
         }

@@ -6,7 +6,7 @@ namespace GameHelper.StaticFiles
 {
     public static class Constants
     {
-        static readonly List<string> RestaurantBrandsList = new List<string>
+        public static readonly List<string> RestaurantBrandsList = new List<string>
         {
             "Fried Geese & Donkey",
             "Golden Duck Diner",
@@ -14,5 +14,7 @@ namespace GameHelper.StaticFiles
             "Xango Blues Bar",
             "Gluttony Inc. Burgers"
         };
+
+        public static readonly int EmployeeSalary = 5;
     }
 }
