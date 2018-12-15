@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using GameHelper.StaticFiles;
 namespace GameHelper.Models
 {
@@ -61,20 +62,21 @@ namespace GameHelper.Models
 
         private void FireEmployees(int numToFire)
         {
-            int selection = 0;
-
             Console.WriteLine($"Player {Id}, choose employees to fire...");
             Console.WriteLine("-----------------");
             ListEmployees();
 
             for (int employeesFired = 0; employeesFired < numToFire; employeesFired++)
             {
+                int selection = 0;
+
                 while (selection <= 0)
                 {
                     selection = StaticFiles.HelperFunctions.GetNumericInput(Employees.Count);
                 }
 
                 Console.WriteLine($"Employee {selection} fired.");
+
             }
 
 
@@ -90,8 +92,9 @@ namespace GameHelper.Models
         private void ListEmployees()
         {
             int count = 1;
+            List<EmployeeModel> SortedList = Employees.OrderBy(o => o.Name).ToList();
 
-            foreach (EmployeeModel employee in Employees)
+            foreach (EmployeeModel employee in SortedList)
             {
                 Console.WriteLine($"{count}. {employee.Name}");
                 count++;
