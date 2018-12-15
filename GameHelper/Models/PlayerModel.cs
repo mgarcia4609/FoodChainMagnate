@@ -62,7 +62,7 @@ namespace GameHelper.Models
 
         private void FireEmployees(int numToFire)
         {
-            Console.WriteLine($"Player {Id}, choose employees to fire...");
+            Console.WriteLine($"Player {Id}, choose {numToFire} employees to fire...");
             Console.WriteLine("-----------------");
             ListEmployees();
 
@@ -76,10 +76,7 @@ namespace GameHelper.Models
                 }
 
                 Console.WriteLine($"Employee {selection} fired.");
-
             }
-
-
         }
 
         public void PrintEmployeeList()
@@ -103,7 +100,7 @@ namespace GameHelper.Models
 
         private int CalculateSalariesOwed()
         {
-            Console.WriteLine("Calculating Player {Id}'s salaries owed...");
+            Console.WriteLine($"Calculating Player {Id}'s salaries owed...");
             int total = 0;
 
             foreach (EmployeeModel employee in this.Employees)
