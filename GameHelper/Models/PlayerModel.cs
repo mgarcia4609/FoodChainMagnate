@@ -11,6 +11,7 @@ namespace GameHelper.Models
         public bool IsTurn { get; set; }
         public string RestaurantName { get; set; }
         public List<EmployeeModel> Employees { get; set; }
+        public List<RestaurantModel> Restaurants { get; set; }
         public int Dollars { get; set; }
 
         public PlayerModel()
@@ -24,7 +25,7 @@ namespace GameHelper.Models
             //TODO: Implement logic to choose restaurant name
             RestaurantName = "Fried Geese & Donkey";
             Employees = new List<EmployeeModel>();
-            Dollars = 0;
+            Dollars = 5;
             Console.WriteLine("Player Created!");
         }
 
@@ -62,39 +63,56 @@ namespace GameHelper.Models
 
         private void FireEmployees(int numToFire)
         {
-            Console.WriteLine($"Player {Id}, choose {numToFire} employees to fire...");
-            Console.WriteLine("-----------------");
-            ListEmployees();
-
             for (int employeesFired = 0; employeesFired < numToFire; employeesFired++)
             {
                 int selection = 0;
+                EmployeeModel employee = new EmployeeModel();
+
+                PrintEmployeeList("fire", (numToFire - employeesFired));
 
                 while (selection <= 0)
                 {
                     selection = StaticFiles.HelperFunctions.GetNumericInput(Employees.Count);
                 }
 
-                Console.WriteLine($"Employee {selection} fired.");
+                if (selection > 0)
+                {
+                    employee = Employees.Find(e => e.Number == selection);
+                    FireEmployee(employee);
+                }
             }
         }
-
-        public void PrintEmployeeList()
+        private void FireEmployee(EmployeeModel employee)
         {
-            Console.WriteLine($"Player {Id}'s employees:");
-            Console.WriteLine("-----------------");
-            ListEmployees();
+            Employees.Remove(employee);
+            Console.WriteLine($"{employee.Name} fired.");
+        }
+
+        public void PrintEmployeeList(string type, int numToFire = 0)
+        {
+            Console.WriteLine();
+            if (type == "list")
+            {
+                Console.WriteLine($"Player {Id}'s employees:");
+                Console.WriteLine("-----------------");
+                ListEmployees();
+            }
+            else if (type == "fire")
+            {
+                Console.WriteLine($"Player {Id}, choose {numToFire} employees to fire...");
+                Console.WriteLine("-----------------");
+                ListEmployees();
+            }
+
         }
 
         private void ListEmployees()
         {
-            int count = 1;
-            List<EmployeeModel> SortedList = Employees.OrderBy(o => o.Name).ToList();
+            UpdateEmployeeNumbers();
 
-            foreach (EmployeeModel employee in SortedList)
+            foreach (EmployeeModel employee in Employees)
             {
-                Console.WriteLine($"{count}. {employee.Name}");
-                count++;
+                Console.WriteLine($"{employee.Number}. {employee.Name}");
             }
         }
 
@@ -109,6 +127,19 @@ namespace GameHelper.Models
             }
 
             return total;
+        }
+        private void UpdateEmployeeNumbers()
+        {
+            List<EmployeeModel> sortedList = Employees.OrderBy(o => o.Name).ToList();
+            int i = 1;
+
+            foreach (EmployeeModel employee in sortedList)
+            {
+                employee.Number = i;
+                i++;
+            }
+
+            Employees = sortedList;
         }
     }
 }

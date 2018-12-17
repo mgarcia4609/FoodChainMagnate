@@ -4,6 +4,7 @@ namespace GameHelper.Models
 {
     public class EmployeeModel
     {
+        public int Number { get; set; }
         public string Name { get; set; }
         public string Status { get; set; }
         public int Salary { get; set; }
@@ -12,7 +13,7 @@ namespace GameHelper.Models
         public EmployeeRequirement HiringRequirement { get; set; }
         public List<MarketingCampaign> MarketingCampaigns { get; set; }
 
-        public EmployeeModel(string employeeType)
+        public EmployeeModel(string employeeType = null)
         {
             Name = employeeType;
 

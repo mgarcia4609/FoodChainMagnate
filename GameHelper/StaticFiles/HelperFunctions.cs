@@ -12,16 +12,18 @@ namespace GameHelper.StaticFiles
             string input = null;
             int num = 0;
 
+            Console.WriteLine();
             Console.WriteLine("Enter a value:");
             input = Console.ReadLine();
 
-            //if 'num' is a valid integer and is in range 'maxNum'
+            //if 'num' is a valid integer and is in range from 1 to 'maxNum'
             if (int.TryParse(input, out num) && RangeIsValid(num, maxNum))
             {
                 return num;  
             }
             else
             {
+                // if 'num' is not valid, return 0
                 num = 0;
                 return num;
             }
