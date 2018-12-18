@@ -4,11 +4,16 @@ using System.Text;
 
 namespace GameHelper.Models
 {
-    public class EmployeeEffect
+    public class EmployeeType
     {
-        public bool IsAvailable { get; set; }
         public string Type { get; set; }
         public int Magnitude { get; set; }
+        public string Phase { get; set; }
+
+        public EmployeeType(string type)
+        {
+            Type = type;
+        }
 
     }
 }

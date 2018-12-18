@@ -8,6 +8,7 @@ namespace GameHelper.Models
     {
         public int Id { get; set; }
         public int TurnOrderPosition { get; set; }
+        public int ActiveEmployeeSlots { get; set; }
         public bool IsTurn { get; set; }
         public string RestaurantName { get; set; }
         public List<EmployeeModel> Employees { get; set; }
@@ -16,7 +17,6 @@ namespace GameHelper.Models
 
         public PlayerModel()
         {
-
             // TODO: Create logic to assign player numbers
             Id = 1;
             Console.WriteLine($"Creating Player {Id}...");
@@ -25,22 +25,24 @@ namespace GameHelper.Models
             //TODO: Implement logic to choose restaurant name
             RestaurantName = "Fried Geese & Donkey";
             Employees = new List<EmployeeModel>();
+            ActiveEmployeeSlots = 0;
             Dollars = 5;
             Console.WriteLine("Player Created!");
         }
 
         public void HireEmployee(string employeeName)
         {
-            Console.WriteLine($"Hiring {employeeName}");
             EmployeeModel newEmployee = new EmployeeModel(employeeName);
+
+            Console.WriteLine($"Hiring {employeeName}");
             Employees.Add(newEmployee);
         }
 
         public void PaySalaries()
         {
             int totalSalaryOwed = CalculateSalariesOwed();
-            decimal numEmployeesToFire = 0;
             int roundedNumEmployeesToFire = 0;
+            decimal numEmployeesToFire = 0.0M;
 
             if (totalSalaryOwed > 0)
             {
@@ -49,9 +51,12 @@ namespace GameHelper.Models
 
             if (Dollars < 0)
             {
+                //dollars in the red indicate salaries that can't be paid
+                //divide that amount by an employee's salary and round up
                 numEmployeesToFire = Math.Abs(Dollars) / StaticFiles.Constants.EmployeeSalary;
                 roundedNumEmployeesToFire = (int)Math.Ceiling(numEmployeesToFire);
 
+                //can't go into debt
                 Dollars = 0;
             }
 
@@ -70,6 +75,7 @@ namespace GameHelper.Models
 
                 PrintEmployeeList("fire", (numToFire - employeesFired));
 
+                //input loop
                 while (selection <= 0)
                 {
                     selection = StaticFiles.HelperFunctions.GetNumericInput(Employees.Count);
@@ -118,10 +124,11 @@ namespace GameHelper.Models
 
         private int CalculateSalariesOwed()
         {
-            Console.WriteLine($"Calculating Player {Id}'s salaries owed...");
             int total = 0;
 
-            foreach (EmployeeModel employee in this.Employees)
+            Console.WriteLine($"Calculating Player {Id}'s salaries owed...");
+
+            foreach (EmployeeModel employee in Employees)
             {
                 total += employee.Salary;
             }

@@ -16,5 +16,7 @@ namespace GameHelper.StaticFiles
         };
 
         public static readonly int EmployeeSalary = 5;
+
+        public enum ActivePhase { Restructuring = 1, OrderOfBusiness = 2, Working = 3, DinnerTime = 4, PayDay = 5 }
     }
 }

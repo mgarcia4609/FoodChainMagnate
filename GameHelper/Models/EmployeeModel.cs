@@ -9,32 +9,52 @@ namespace GameHelper.Models
         public string Status { get; set; }
         public int Salary { get; set; }
         public bool IsMarketer { get; set; }
-        public EmployeeEffect Effect { get; set; }
+        public EmployeeType Type { get; set; }
         public EmployeeRequirement HiringRequirement { get; set; }
         public List<MarketingCampaign> MarketingCampaigns { get; set; }
 
-        public EmployeeModel(string employeeType = null)
+        public EmployeeModel(string employeeName = null)
         {
-            Name = employeeType;
+            Name = employeeName;
 
-            if (employeeType == "Kitchen Trainee")
+            if (employeeName == "Kitchen Trainee")
             {
                 Status = "Beach";
                 Salary = StaticFiles.Constants.EmployeeSalary;
                 IsMarketer = false;
+                Type = new EmployeeType("cook");
             }
-            if (employeeType == "Marketing Trainee")
+            if (employeeName == "Marketing Trainee")
             {
                 Status = "Beach";
                 Salary = StaticFiles.Constants.EmployeeSalary;
                 IsMarketer = false;
+                Type = new EmployeeType("marketer");
             }
-            if (employeeType == "Management Trainee")
+            if (employeeName == "Management Trainee")
             {
                 Status = "Beach";
                 Salary = StaticFiles.Constants.EmployeeSalary;
                 IsMarketer = true;
+                Type = new EmployeeType("management");
             }
+        }
+
+        public bool ActiveThisPhase(string phase)
+        {
+            if (Type.Phase == phase)
+            { 
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public void ApplyEffect()
+        {
+            if (ActiveThisPhase(GameLogic.Globals.ActivePhase.))
         }
     }
 }
