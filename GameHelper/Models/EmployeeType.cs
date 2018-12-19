@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Phase = GameHelper.StaticFiles.Constants.ActivePhase;
 
 namespace GameHelper.Models
 {
@@ -8,12 +6,11 @@ namespace GameHelper.Models
     {
         public string Type { get; set; }
         public int Magnitude { get; set; }
-        public string Phase { get; set; }
+        public Phase Phase { get; set; }
 
         public EmployeeType(string type)
         {
             Type = type;
         }
-
     }
 }

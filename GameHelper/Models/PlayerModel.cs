@@ -8,26 +8,42 @@ namespace GameHelper.Models
     {
         public int Id { get; set; }
         public int TurnOrderPosition { get; set; }
-        public int ActiveEmployeeSlots { get; set; }
+        public int ActiveEmployeeSlotsAvailable { get; set; }
+        public int ActiveEmployees { get; set; }
         public bool IsTurn { get; set; }
         public string RestaurantName { get; set; }
         public List<EmployeeModel> Employees { get; set; }
         public List<RestaurantModel> Restaurants { get; set; }
         public int Dollars { get; set; }
 
+
         public PlayerModel()
         {
-            // TODO: Create logic to assign player numbers
             Id = 1;
             Console.WriteLine($"Creating Player {Id}...");
+
             TurnOrderPosition = 1;
             IsTurn = true;
-            //TODO: Implement logic to choose restaurant name
             RestaurantName = "Fried Geese & Donkey";
             Employees = new List<EmployeeModel>();
-            ActiveEmployeeSlots = 0;
+            ActiveEmployeeSlotsAvailable = 1;
+            ActiveEmployees = 0;
+
             Dollars = 5;
+
             Console.WriteLine("Player Created!");
+        }
+
+        public void CalculateAvailableActiveEmployeeSlots()
+        {
+            foreach (EmployeeModel employee in Employees
+                .Where<EmployeeModel>(e => e.EmployeeType.Type == "management"))
+            {
+                if (employee.Status == "active")
+                {
+                    ActiveEmployeeSlotsAvailable += employee.EmployeeType.Magnitude;
+                }
+            }
         }
 
         public void HireEmployee(string employeeName)

@@ -1,12 +1,14 @@
-﻿using GameHelper.StaticFiles;
+﻿using Phase =  GameHelper.StaticFiles.Constants.ActivePhase;
 
 namespace GameHelper.GameLogic
 {
-    class Globals
+    public class Globals
     {
+        Phase GamePhase { get; set; }
+
         public Globals()
         {
-            var gamePhase = Constants.ActivePhase.Restructuring;
-        }
+            GamePhase = Phase.Restructuring;
+        }        
     }
 }

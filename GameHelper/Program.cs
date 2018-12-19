@@ -1,6 +1,5 @@
 ﻿using System;
 using GameHelper.Models;
-using GameHelper.StaticFiles;
 using GameHelper.GameLogic;
 
 namespace GameHelper

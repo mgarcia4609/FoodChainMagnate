@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using GameHelper.GameLogic;
+using Phases = GameHelper.StaticFiles.Constants.ActivePhase;
+using Constants = GameHelper.StaticFiles.Constants;
 
 namespace GameHelper.Models
 {
@@ -9,40 +12,38 @@ namespace GameHelper.Models
         public string Status { get; set; }
         public int Salary { get; set; }
         public bool IsMarketer { get; set; }
-        public EmployeeType Type { get; set; }
+        public EmployeeType EmployeeType { get; set; }
         public EmployeeRequirement HiringRequirement { get; set; }
         public List<MarketingCampaign> MarketingCampaigns { get; set; }
 
         public EmployeeModel(string employeeName = null)
         {
             Name = employeeName;
+            Status = "Beach";
 
             if (employeeName == "Kitchen Trainee")
             {
-                Status = "Beach";
-                Salary = StaticFiles.Constants.EmployeeSalary;
+                Salary = Constants.EmployeeSalary;
                 IsMarketer = false;
-                Type = new EmployeeType("cook");
+                EmployeeType = new EmployeeType("cook") {Magnitude = 1, Phase = Phases.OrderOfBusiness };
             }
             if (employeeName == "Marketing Trainee")
             {
-                Status = "Beach";
-                Salary = StaticFiles.Constants.EmployeeSalary;
+                Salary = 0;
                 IsMarketer = false;
-                Type = new EmployeeType("marketer");
+                EmployeeType = new EmployeeType("marketer") { Magnitude = 1, Phase = Phases.OrderOfBusiness };
             }
             if (employeeName == "Management Trainee")
             {
-                Status = "Beach";
-                Salary = StaticFiles.Constants.EmployeeSalary;
+                Salary = 0;
                 IsMarketer = true;
-                Type = new EmployeeType("management");
+                EmployeeType = new EmployeeType("management") { Magnitude = 1, Phase = Phases.Restructuring };
             }
         }
 
-        public bool ActiveThisPhase(string phase)
+        public bool EmployeeActiveThisPhase(Phases activePhase)
         {
-            if (Type.Phase == phase)
+            if (EmployeeType.Phase == activePhase)
             { 
                 return true;
             }
@@ -50,11 +51,6 @@ namespace GameHelper.Models
             {
                 return false;
             }
-        }
-
-        public void ApplyEffect()
-        {
-            if (ActiveThisPhase(GameLogic.Globals.ActivePhase.))
         }
     }
 }
