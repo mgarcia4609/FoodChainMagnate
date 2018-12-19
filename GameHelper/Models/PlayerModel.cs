@@ -48,7 +48,16 @@ namespace GameHelper.Models
 
         public void HireEmployee(string employeeName)
         {
+            int selection = 0;
             EmployeeModel newEmployee = new EmployeeModel(employeeName);
+
+            //PrintEmployeeList("hire", 1);
+            ////input loop
+            //while (selection <= 0)
+            //{
+            //    selection = StaticFiles.HelperFunctions.GetNumericInput(Employees.Count);
+            //}
+
 
             Console.WriteLine($"Hiring {employeeName}");
             Employees.Add(newEmployee);
@@ -110,7 +119,7 @@ namespace GameHelper.Models
             Console.WriteLine($"{employee.Name} fired.");
         }
 
-        public void PrintEmployeeList(string type, int numToFire = 0)
+        public void PrintEmployeeList(string type, int num = 0)
         {
             Console.WriteLine();
             if (type == "list")
@@ -121,7 +130,7 @@ namespace GameHelper.Models
             }
             else if (type == "fire")
             {
-                Console.WriteLine($"Player {Id}, choose {numToFire} employees to fire...");
+                Console.WriteLine($"Player {Id}, choose {num} employees to fire...");
                 Console.WriteLine("-----------------");
                 ListEmployees();
             }

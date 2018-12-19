@@ -29,7 +29,7 @@ namespace GameHelper.Models
             }
             if (employeeName == "Marketing Trainee")
             {
-                Salary = 0;
+                Salary = Constants.EmployeeSalary;
                 IsMarketer = false;
                 EmployeeType = new EmployeeType("marketer") { Magnitude = 1, Phase = Phases.OrderOfBusiness };
             }

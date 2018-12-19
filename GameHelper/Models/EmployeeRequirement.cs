@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GameHelper.Models
+﻿namespace GameHelper.Models
 {
     public class EmployeeRequirement
     {
