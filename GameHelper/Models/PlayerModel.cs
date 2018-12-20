@@ -48,7 +48,7 @@ namespace GameHelper.Models
 
         public void HireEmployee(string employeeName)
         {
-            int selection = 0;
+            //int selection = 0;
             EmployeeModel newEmployee = new EmployeeModel(employeeName);
 
             //PrintEmployeeList("hire", 1);
@@ -113,7 +113,7 @@ namespace GameHelper.Models
                 }
             }
         }
-        private void FireEmployee(EmployeeModel employee)
+        public void FireEmployee(EmployeeModel employee)
         {
             Employees.Remove(employee);
             Console.WriteLine($"{employee.Name} fired.");
@@ -147,7 +147,7 @@ namespace GameHelper.Models
             }
         }
 
-        private int CalculateSalariesOwed()
+        public int CalculateSalariesOwed()
         {
             int total = 0;
 
