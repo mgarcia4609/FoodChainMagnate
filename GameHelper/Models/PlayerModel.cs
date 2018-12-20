@@ -160,7 +160,7 @@ namespace GameHelper.Models
 
             return total;
         }
-        private void UpdateEmployeeNumbers()
+        public void UpdateEmployeeNumbers()
         {
             List<EmployeeModel> sortedList = Employees.OrderBy(o => o.Name).ToList();
             int i = 1;
