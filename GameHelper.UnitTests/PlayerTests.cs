@@ -113,5 +113,51 @@ namespace GameHelper.UnitTests
                 employeeNumber++;
             }
         }
+
+        [TestMethod]
+        public void PayEmployees_SalariesPayed_CanNotPay()
+        {
+            // Arrange
+            int numberToFire;
+            var player = new PlayerModel() { Dollars = 5 };
+            var employeeList = new List<EmployeeModel>()
+            {
+                new EmployeeModel("Kitchen Trainee") {Salary = 0 },
+                new EmployeeModel("Marketing Trainee") {Salary = 5 },
+                new EmployeeModel("Management Trainee") {Salary = 5 }
+            };
+            player.Employees = employeeList;
+
+            // Act
+            numberToFire = player.GetNumberToFire();
+
+            // Assert
+            Assert.AreEqual(1, numberToFire);
+            Assert.AreEqual(3, player.Employees.Count);
+            Assert.AreEqual(0, player.Dollars);
+        }
+
+        [TestMethod]
+        public void PayEmployees_SalariesPayed_CanPay()
+        {
+            // Arrange
+            int numberToFire;
+            var player = new PlayerModel() { Dollars = 35 };
+            var employeeList = new List<EmployeeModel>()
+            {
+                new EmployeeModel("Kitchen Trainee") {Salary = 5 },
+                new EmployeeModel("Marketing Trainee") {Salary = 5 },
+                new EmployeeModel("Management Trainee") {Salary = 5 }
+            };
+            player.Employees = employeeList;
+
+            // Act
+            numberToFire = player.GetNumberToFire();
+
+            // Assert
+            Assert.AreEqual(3, player.Employees.Count);
+            Assert.AreEqual(0, numberToFire);
+            Assert.AreEqual(20, player.Dollars);
+        }
     }
 }

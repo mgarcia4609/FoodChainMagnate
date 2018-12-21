@@ -18,7 +18,7 @@ namespace GameHelper
             player.HireEmployee("Marketing Trainee");
             player.HireEmployee("Management Trainee");
 
-            player.PaySalaries();
+            player.FireEmployees(player.GetNumberToFire());
 
             Console.ReadLine();
         }

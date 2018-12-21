@@ -63,7 +63,7 @@ namespace GameHelper.Models
             Employees.Add(newEmployee);
         }
 
-        public void PaySalaries()
+        public int GetNumberToFire()
         {
             int totalSalaryOwed = CalculateSalariesOwed();
             int roundedNumEmployeesToFire = 0;
@@ -85,13 +85,10 @@ namespace GameHelper.Models
                 Dollars = 0;
             }
 
-            if (roundedNumEmployeesToFire > 0)
-            {
-                FireEmployees(roundedNumEmployeesToFire);
-            }
+            return roundedNumEmployeesToFire;
         }
 
-        private void FireEmployees(int numToFire)
+        public void FireEmployees(int numToFire)
         {
             for (int employeesFired = 0; employeesFired < numToFire; employeesFired++)
             {
