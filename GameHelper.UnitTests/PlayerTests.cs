@@ -115,7 +115,7 @@ namespace GameHelper.UnitTests
         }
 
         [TestMethod]
-        public void PayEmployees_SalariesPayed_CanNotPay()
+        public void GetNumberToFire_SalariesPayed_CanNotPay()
         {
             // Arrange
             int numberToFire;
@@ -138,7 +138,7 @@ namespace GameHelper.UnitTests
         }
 
         [TestMethod]
-        public void PayEmployees_SalariesPayed_CanPay()
+        public void GetNumberToFire_SalariesPayed_CanPay()
         {
             // Arrange
             int numberToFire;
@@ -158,6 +158,55 @@ namespace GameHelper.UnitTests
             Assert.AreEqual(3, player.Employees.Count);
             Assert.AreEqual(0, numberToFire);
             Assert.AreEqual(20, player.Dollars);
+        }
+        [TestMethod]
+        public void FireEmployees_EmployeesFired_RemoveEmployees()
+        {
+            // Arrange
+            var player = new PlayerModel();
+            var employeeList = new List<EmployeeModel>()
+            {
+                new EmployeeModel("Kitchen Trainee"),
+                new EmployeeModel("Marketing Trainee"),
+                new EmployeeModel("Management Trainee")
+            };
+            player.Employees = employeeList;
+
+            // Act
+            player.FireEmployees(1, 2);
+            player.FireEmployees(1, 2);
+
+            // Assert
+            Assert.AreEqual(1, player.Employees.Count);
+            Assert.AreEqual("Kitchen Trainee", 
+                player.Employees.Find(e => e.IsMarketer == false).Name);
+            Assert.IsNull(player.Employees.Find(e => e.Name == "Marketing Trainee"));
+        }
+
+        [TestMethod]
+        public void FireEmployees_EmployeesNotFired_EmployeesUnchanged()
+        {
+            // Arrange
+            var player = new PlayerModel();
+            var employeeList = new List<EmployeeModel>()
+            {
+                new EmployeeModel("Kitchen Trainee"),
+                new EmployeeModel("Marketing Trainee"),
+                new EmployeeModel("Management Trainee")
+            };
+            player.Employees = employeeList;
+
+            // Act
+            player.FireEmployees(0);
+
+            // Assert
+            Assert.AreEqual(3, player.Employees.Count);
+            Assert.AreEqual(1,
+                player.Employees.Find(e => e.Name == "Kitchen Trainee").Number);
+            Assert.AreEqual(2,
+                player.Employees.Find(e => e.Name == "Management Trainee").Number);
+            Assert.AreEqual(3,
+                player.Employees.Find(e => e.Name == "Marketing Trainee").Number);
         }
     }
 }

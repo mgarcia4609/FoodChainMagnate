@@ -88,16 +88,16 @@ namespace GameHelper.Models
             return roundedNumEmployeesToFire;
         }
 
-        public void FireEmployees(int numToFire)
+        public void FireEmployees(int numToFire, int selection = 0)
         {
+            UpdateEmployeeNumbers();
             for (int employeesFired = 0; employeesFired < numToFire; employeesFired++)
             {
-                int selection = 0;
                 EmployeeModel employee = new EmployeeModel();
 
                 PrintEmployeeList("fire", (numToFire - employeesFired));
 
-                //input loop
+                //input loop. Selection defaults to 0 to allow override for tests.
                 while (selection <= 0)
                 {
                     selection = StaticFiles.HelperFunctions.GetNumericInput(Employees.Count);
@@ -108,6 +108,7 @@ namespace GameHelper.Models
                     employee = Employees.Find(e => e.Number == selection);
                     FireEmployee(employee);
                 }
+                UpdateEmployeeNumbers();
             }
         }
         public void FireEmployee(EmployeeModel employee)
