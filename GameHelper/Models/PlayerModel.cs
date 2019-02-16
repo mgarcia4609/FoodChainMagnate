@@ -109,6 +109,7 @@ namespace GameHelper.Models
                     FireEmployee(employee);
                 }
                 UpdateEmployeeNumbers();
+                selection = 0;
             }
         }
         public void FireEmployee(EmployeeModel employee)
